@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import heroImageWebP from "@/assets/hero-tote.webp";
 import heroImage from "@/assets/hero-tote.jpg";
 
 const Hero = () => {
@@ -6,11 +7,14 @@ const Hero = () => {
     <section className="relative min-h-screen flex items-center">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <img 
-          src={heroImage} 
-          alt="The Cloud Tote - Quilted puffy bag" 
-          className="w-full h-full object-cover"
-        />
+        <picture>
+          <source srcSet={heroImageWebP} type="image/webp" />
+          <img
+            src={heroImage}
+            alt="The Cloud Tote - Quilted puffy bag"
+            className="w-full h-full object-cover"
+          />
+        </picture>
         <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-background/20 to-transparent" />
       </div>
 

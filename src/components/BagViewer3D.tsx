@@ -1,13 +1,13 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment, ContactShadows } from '@react-three/drei';
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import * as THREE from 'three';
 
 interface BagModelProps {
   color: string;
 }
 
-const BagModel = ({ color }: BagModelProps) => {
+const BagModel = memo(({ color }: BagModelProps) => {
   // Create a slouchy canvas bag shape using bezier curves
   const bagShape = new THREE.Shape();
   
@@ -72,13 +72,13 @@ const BagModel = ({ color }: BagModelProps) => {
       </mesh>
     </group>
   );
-};
+});
 
 interface BagViewer3DProps {
   className?: string;
 }
 
-const BagViewer3D = ({ className = "" }: BagViewer3DProps) => {
+const BagViewer3D = memo(({ className = "" }: BagViewer3DProps) => {
   const [selectedColor, setSelectedColor] = useState("#F5F0E8");
   
   const colors = [
@@ -91,18 +91,22 @@ const BagViewer3D = ({ className = "" }: BagViewer3DProps) => {
 
   return (
     <div className={`${className}`}>
-      <div className="h-[400px] lg:h-[500px] w-full bg-secondary/30 rounded-lg overflow-hidden relative">
+      <div className="h-[300px] sm:h-[400px] lg:h-[500px] xl:h-[600px] w-full bg-secondary/30 rounded-lg overflow-hidden relative">
         <Canvas
           camera={{ position: [0, 1, 6], fov: 35 }}
           shadows
-          gl={{ antialias: true }}
+          dpr={[1, 1.5]}
+          gl={{
+            antialias: true,
+            powerPreference: "high-performance",
+          }}
         >
           <ambientLight intensity={0.5} />
-          <directionalLight 
-            position={[5, 5, 5]} 
-            intensity={1} 
-            castShadow 
-            shadow-mapSize={[1024, 1024]}
+          <directionalLight
+            position={[5, 5, 5]}
+            intensity={1}
+            castShadow
+            shadow-mapSize={[512, 512]}
           />
           <directionalLight position={[-5, 3, -5]} intensity={0.3} />
           
@@ -118,9 +122,11 @@ const BagViewer3D = ({ className = "" }: BagViewer3DProps) => {
           
           <Environment preset="studio" />
           
-          <OrbitControls 
+          <OrbitControls
             enableZoom={false}
             enablePan={false}
+            enableDamping={true}
+            dampingFactor={0.05}
             minPolarAngle={Math.PI / 4}
             maxPolarAngle={Math.PI / 1.8}
             autoRotate
@@ -129,30 +135,31 @@ const BagViewer3D = ({ className = "" }: BagViewer3DProps) => {
         </Canvas>
         
         {/* Instruction overlay */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs text-muted-foreground bg-background/80 px-3 py-1.5 rounded-full">
+        <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 text-[11px] sm:text-xs text-muted-foreground bg-background/80 backdrop-blur-sm px-2 sm:px-3 py-1 sm:py-1.5 rounded-full">
           Sleep om te draaien
         </div>
       </div>
       
       {/* Color selector */}
-      <div className="flex items-center justify-center gap-3 mt-6">
-        <span className="text-xs text-muted-foreground tracked-wide">KLEUR:</span>
+      <div className="flex items-center justify-center gap-2 sm:gap-3 mt-4 sm:mt-6">
+        <span className="text-[10px] sm:text-xs text-muted-foreground tracked-wide">KLEUR:</span>
         {colors.map((color) => (
           <button
             key={color.name}
             onClick={() => setSelectedColor(color.value)}
-            className={`w-6 h-6 rounded-full border-2 transition-all hover:scale-110 ${
-              selectedColor === color.value 
-                ? 'border-foreground scale-110' 
+            className={`w-5 sm:w-6 h-5 sm:h-6 rounded-full border-2 transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-foreground ${
+              selectedColor === color.value
+                ? 'border-foreground scale-110'
                 : 'border-transparent'
             }`}
             style={{ backgroundColor: color.value }}
             title={color.name}
+            aria-label={`Select ${color.name} color`}
           />
         ))}
       </div>
     </div>
   );
-};
+});
 
 export default BagViewer3D;

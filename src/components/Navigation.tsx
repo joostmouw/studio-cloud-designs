@@ -1,8 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ShoppingBag, Menu, X } from "lucide-react";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Close menu on Escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener("keydown", handleEscape);
+      return () => document.removeEventListener("keydown", handleEscape);
+    }
+  }, [isMenuOpen]);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
@@ -28,17 +42,30 @@ const Navigation = () => {
 
           {/* Cart & Mobile Menu */}
           <div className="flex items-center gap-4">
-            <button className="relative text-foreground hover:opacity-60 transition-opacity">
+            <button
+              className="relative text-foreground hover:opacity-60 transition-opacity"
+              aria-label="Shopping cart"
+            >
               <ShoppingBag size={20} strokeWidth={1.5} />
-              <span className="absolute -top-1 -right-1 w-4 h-4 bg-foreground text-background text-[10px] flex items-center justify-center">
+              <span
+                className="absolute -top-1 -right-1 w-4 h-4 bg-foreground text-background text-[10px] flex items-center justify-center"
+                aria-label="0 items in cart"
+              >
                 0
               </span>
             </button>
-            <button 
+            <button
               className="lg:hidden text-foreground"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
             >
-              {isMenuOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
+              {isMenuOpen ? (
+                <X size={24} strokeWidth={1.5} />
+              ) : (
+                <Menu size={24} strokeWidth={1.5} />
+              )}
             </button>
           </div>
         </div>
@@ -46,25 +73,30 @@ const Navigation = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="lg:hidden bg-background border-t border-border animate-fade-in">
+        <div
+          id="mobile-menu"
+          className="lg:hidden bg-background border-t border-border animate-slide-down"
+          role="navigation"
+          aria-label="Mobile navigation"
+        >
           <div className="px-6 py-8 flex flex-col gap-6">
-            <a 
-              href="#collection" 
-              className="text-sm tracked-wide text-foreground"
+            <a
+              href="#collection"
+              className="text-sm tracked-wide text-foreground hover:opacity-60 transition-opacity"
               onClick={() => setIsMenuOpen(false)}
             >
               COLLECTION
             </a>
-            <a 
-              href="#about" 
-              className="text-sm tracked-wide text-foreground"
+            <a
+              href="#about"
+              className="text-sm tracked-wide text-foreground hover:opacity-60 transition-opacity"
               onClick={() => setIsMenuOpen(false)}
             >
               ABOUT
             </a>
-            <a 
-              href="#contact" 
-              className="text-sm tracked-wide text-foreground"
+            <a
+              href="#contact"
+              className="text-sm tracked-wide text-foreground hover:opacity-60 transition-opacity"
               onClick={() => setIsMenuOpen(false)}
             >
               CONTACT

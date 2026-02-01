@@ -4,15 +4,17 @@ interface ProductCardProps {
   name: string;
   price: string;
   image: string;
+  imageWebP?: string;
   colors: string[];
   isNew?: boolean;
 }
 
-const ProductCard = ({ name, price, image, colors, isNew }: ProductCardProps) => {
+const ProductCard = ({ name, price, image, imageWebP, colors, isNew }: ProductCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   return (
-    <div 
+    <div
       className="group cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -24,13 +26,23 @@ const ProductCard = ({ name, price, image, colors, isNew }: ProductCardProps) =>
             NEW
           </span>
         )}
-        <img 
-          src={image} 
-          alt={name}
-          className={`w-full h-full object-cover transition-transform duration-700 ease-out ${
-            isHovered ? 'scale-105' : 'scale-100'
-          }`}
-        />
+        {/* Placeholder skeleton while loading */}
+        {!isImageLoaded && (
+          <div className="absolute inset-0 bg-gradient-to-r from-secondary via-muted to-secondary animate-pulse" />
+        )}
+        {/* Picture element for WebP with JPG fallback */}
+        <picture>
+          {imageWebP && <source srcSet={imageWebP} type="image/webp" />}
+          <img
+            src={image}
+            alt={name}
+            loading="lazy"
+            onLoad={() => setIsImageLoaded(true)}
+            className={`w-full h-full object-cover transition-transform duration-700 ease-out ${
+              isHovered ? 'scale-105' : 'scale-100'
+            } ${isImageLoaded ? 'opacity-100' : 'opacity-0'}`}
+          />
+        </picture>
         
         {/* Quick Add Overlay */}
         <div 
@@ -46,17 +58,19 @@ const ProductCard = ({ name, price, image, colors, isNew }: ProductCardProps) =>
 
       {/* Product Info */}
       <div className="space-y-2">
-        <h3 className="text-sm font-medium text-foreground">{name}</h3>
-        <p className="text-sm text-muted-foreground">{price}</p>
-        
+        <h3 className="text-xs sm:text-sm font-medium text-foreground line-clamp-2">{name}</h3>
+        <p className="text-xs sm:text-sm text-muted-foreground">{price}</p>
+
         {/* Color Swatches */}
         <div className="flex gap-2 pt-1">
           {colors.map((color, index) => (
-            <div 
+            <div
               key={index}
-              className="w-4 h-4 border border-border cursor-pointer hover:scale-110 transition-transform"
+              className="w-3 sm:w-4 h-3 sm:h-4 border border-border cursor-pointer hover:scale-110 transition-transform rounded-sm"
               style={{ backgroundColor: color }}
               title={color}
+              role="button"
+              tabIndex={0}
             />
           ))}
         </div>

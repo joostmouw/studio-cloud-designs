@@ -1,4 +1,8 @@
 import ProductCard from "./ProductCard";
+// WebP images for better performance, with JPG fallback
+import toteStoneWebP from "@/assets/tote-stone.webp";
+import toteBlackWebP from "@/assets/tote-black.webp";
+import toteCreamWebP from "@/assets/tote-cream.webp";
 import toteStone from "@/assets/tote-stone.jpg";
 import toteBlack from "@/assets/tote-black.jpg";
 import toteCream from "@/assets/tote-cream.jpg";
@@ -9,6 +13,7 @@ const products = [
     name: "The Cloud Tote No. 1",
     price: "€34,95",
     image: toteCream,
+    imageWebP: toteCreamWebP,
     colors: ["#F5F0E8", "#A8A39D", "#1A1A1A"],
     isNew: true,
   },
@@ -17,6 +22,7 @@ const products = [
     name: "The Cloud Tote — Stone",
     price: "€34,95",
     image: toteStone,
+    imageWebP: toteStoneWebP,
     colors: ["#A8A39D", "#F5F0E8", "#1A1A1A"],
     isNew: false,
   },
@@ -25,6 +31,7 @@ const products = [
     name: "The Cloud Tote — Midnight",
     price: "€34,95",
     image: toteBlack,
+    imageWebP: toteBlackWebP,
     colors: ["#1A1A1A", "#A8A39D", "#F5F0E8"],
     isNew: false,
   },
@@ -32,8 +39,8 @@ const products = [
 
 const ProductSection = () => {
   return (
-    <section id="collection" className="py-24 lg:py-32 bg-background">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+    <section id="collection" className="py-20 sm:py-24 lg:py-32 bg-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         {/* Section Header */}
         <div className="text-center mb-16 lg:mb-24">
           <p className="text-xs tracked-ultra text-muted-foreground mb-4">
@@ -49,13 +56,14 @@ const ProductSection = () => {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 xl:gap-10">
           {products.map((product) => (
             <ProductCard
               key={product.id}
               name={product.name}
               price={product.price}
               image={product.image}
+              imageWebP={product.imageWebP}
               colors={product.colors}
               isNew={product.isNew}
             />

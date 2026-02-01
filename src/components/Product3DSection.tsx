@@ -1,11 +1,14 @@
-import { Suspense } from "react";
-import BagViewer3D from "./BagViewer3D";
+import { Suspense, lazy } from "react";
+import BagViewer3DSkeleton from "./BagViewer3DSkeleton";
+
+// Lazy load 3D viewer component to reduce initial bundle size
+const BagViewer3D = lazy(() => import("./BagViewer3D"));
 
 const Product3DSection = () => {
   return (
-    <section className="py-24 lg:py-32 bg-secondary/20">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+    <section className="py-20 sm:py-24 lg:py-32 bg-secondary/20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-20 items-center">
           {/* Text Content */}
           <div className="order-2 lg:order-1">
             <p className="text-xs tracked-ultra text-muted-foreground mb-4">
@@ -42,11 +45,7 @@ const Product3DSection = () => {
           
           {/* 3D Viewer */}
           <div className="order-1 lg:order-2">
-            <Suspense fallback={
-              <div className="h-[400px] lg:h-[500px] w-full bg-secondary/30 rounded-lg flex items-center justify-center">
-                <div className="text-muted-foreground text-sm">Laden...</div>
-              </div>
-            }>
+            <Suspense fallback={<BagViewer3DSkeleton />}>
               <BagViewer3D />
             </Suspense>
           </div>
