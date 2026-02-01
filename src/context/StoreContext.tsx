@@ -7,7 +7,7 @@ export const PRODUCTS: Product[] = [
     id: 'hobo-bag-1',
     name: 'Canvas Hobo Bag',
     description: 'Onze iconische Canvas Hobo Bag is handgemaakt van premium gewassen canvas. Met zijn relaxte silhouet en ruime binnenkant is deze tas perfect voor dagelijks gebruik. De verstelbare schouderband maakt hem comfortabel te dragen.',
-    price: 89.00,
+    price: 34.95,
     images: ['/placeholder.svg'],
     colors: [
       { name: 'Cream', value: '#F5F0E8' },

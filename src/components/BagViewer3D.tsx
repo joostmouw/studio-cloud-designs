@@ -53,18 +53,41 @@ useGLTF.preload('/bag-model.glb');
 
 interface BagViewer3DProps {
   className?: string;
+  selectedColor?: string;
+  onColorChange?: (color: string) => void;
+  colors?: Array<{ name: string; value: string }>;
 }
 
-const BagViewer3D = memo(({ className = "" }: BagViewer3DProps) => {
-  const [selectedColor, setSelectedColor] = useState("#F5F0E8");
-
-  const colors = [
+const BagViewer3D = memo(({
+  className = "",
+  selectedColor: externalSelectedColor,
+  onColorChange,
+  colors: externalColors
+}: BagViewer3DProps) => {
+  const defaultColors = [
     { name: "Cream", value: "#F5F0E8" },
     { name: "Stone", value: "#A8A39D" },
     { name: "Black", value: "#2A2A2A" },
     { name: "Olive", value: "#5C6B4A" },
     { name: "Coral", value: "#C97B6B" },
   ];
+
+  const colors = externalColors || defaultColors;
+  const [selectedColor, setSelectedColor] = useState(externalSelectedColor || "#F5F0E8");
+
+  // Update internal state when external color changes
+  useEffect(() => {
+    if (externalSelectedColor) {
+      setSelectedColor(externalSelectedColor);
+    }
+  }, [externalSelectedColor]);
+
+  const handleColorChange = (color: string) => {
+    setSelectedColor(color);
+    if (onColorChange) {
+      onColorChange(color);
+    }
+  };
 
   return (
     <div className={`${className}`}>
@@ -127,24 +150,26 @@ const BagViewer3D = memo(({ className = "" }: BagViewer3DProps) => {
         </div>
       </div>
 
-      {/* Color selector */}
-      <div className="flex items-center justify-center gap-2 sm:gap-3 mt-4 sm:mt-6">
-        <span className="text-[10px] sm:text-xs text-muted-foreground tracked-wide">KLEUR:</span>
-        {colors.map((color) => (
-          <button
-            key={color.name}
-            onClick={() => setSelectedColor(color.value)}
-            className={`w-5 sm:w-6 h-5 sm:h-6 rounded-full border-2 transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-foreground ${
-              selectedColor === color.value
-                ? 'border-foreground scale-110'
-                : 'border-transparent'
-            }`}
-            style={{ backgroundColor: color.value }}
-            title={color.name}
-            aria-label={`Select ${color.name} color`}
-          />
-        ))}
-      </div>
+      {/* Color selector - only show if no external color selector */}
+      {!externalSelectedColor && (
+        <div className="flex items-center justify-center gap-2 sm:gap-3 mt-4 sm:mt-6">
+          <span className="text-[10px] sm:text-xs text-muted-foreground tracked-wide">KLEUR:</span>
+          {colors.map((color) => (
+            <button
+              key={color.name}
+              onClick={() => handleColorChange(color.value)}
+              className={`w-5 sm:w-6 h-5 sm:h-6 rounded-full border-2 transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-foreground ${
+                selectedColor === color.value
+                  ? 'border-foreground scale-110'
+                  : 'border-transparent'
+              }`}
+              style={{ backgroundColor: color.value }}
+              title={color.name}
+              aria-label={`Select ${color.name} color`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 });

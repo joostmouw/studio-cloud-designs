@@ -72,7 +72,11 @@ const ProductPage = () => {
                   <div className="animate-pulse text-muted-foreground">Laden...</div>
                 </div>
               }>
-                <BagViewer3D className="w-full" />
+                <BagViewer3D
+                  className="w-full"
+                  selectedColor={selectedColor.value}
+                  colors={product.colors}
+                />
               </Suspense>
             </div>
 
@@ -80,9 +84,28 @@ const ProductPage = () => {
             <div className="flex flex-col gap-6">
               {/* Breadcrumb */}
               <nav className="text-xs text-muted-foreground">
-                <a href="/" className="hover:text-foreground">Home</a>
+                <button
+                  onClick={() => navigate('/')}
+                  className="hover:text-foreground cursor-pointer bg-transparent border-0 p-0"
+                >
+                  Home
+                </button>
                 <span className="mx-2">/</span>
-                <a href="/#collection" className="hover:text-foreground">Collection</a>
+                <button
+                  onClick={() => {
+                    navigate('/');
+                    // Scroll to collection section after navigation
+                    setTimeout(() => {
+                      const element = document.getElementById('collection');
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }, 100);
+                  }}
+                  className="hover:text-foreground cursor-pointer bg-transparent border-0 p-0"
+                >
+                  Collection
+                </button>
                 <span className="mx-2">/</span>
                 <span className="text-foreground">{product.name}</span>
               </nav>
