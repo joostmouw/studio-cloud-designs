@@ -2,6 +2,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment, ContactShadows, useGLTF, Center } from '@react-three/drei';
 import { useState, memo, useEffect } from 'react';
 import * as THREE from 'three';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface BagModelProps {
   color: string;
@@ -64,6 +65,8 @@ const BagViewer3D = memo(({
   onColorChange,
   colors: externalColors
 }: BagViewer3DProps) => {
+  const { t } = useLanguage();
+
   const defaultColors = [
     { name: "Cream", value: "#F5F0E8" },
     { name: "Stone", value: "#A8A39D" },
@@ -93,7 +96,7 @@ const BagViewer3D = memo(({
     <div className={`${className}`}>
       <div className="h-[300px] sm:h-[400px] lg:h-[500px] xl:h-[600px] w-full bg-secondary/30 rounded-lg overflow-hidden relative">
         <Canvas
-          camera={{ position: [0, 0.5, 4], fov: 45 }}
+          camera={{ position: [0, 0.5, 5.5], fov: 45 }}
           shadows
           dpr={[1, 1.5]}
           gl={{
@@ -146,7 +149,7 @@ const BagViewer3D = memo(({
 
         {/* Instruction overlay */}
         <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 text-[11px] sm:text-xs text-muted-foreground bg-background/80 backdrop-blur-sm px-2 sm:px-3 py-1 sm:py-1.5 rounded-full">
-          Sleep om te draaien
+          {t('product.dragToRotate')}
         </div>
       </div>
 

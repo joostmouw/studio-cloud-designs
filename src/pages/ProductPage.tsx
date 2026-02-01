@@ -1,10 +1,11 @@
 import { useState, Suspense, lazy, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useStore, PRODUCTS } from '@/context/StoreContext';
+import { useLanguage } from '@/context/LanguageContext';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { Minus, Plus, ShoppingBag, Check, Star, Truck, RotateCcw, Shield, Heart, Eye, Users } from 'lucide-react';
+import { Minus, Plus, ShoppingBag, Check, Star, Truck, RotateCcw, Shield, Heart, Eye, Users, Image as ImageIcon, Box } from 'lucide-react';
 import { ProductColor } from '@/types';
 
 const BagViewer3D = lazy(() => import('@/components/BagViewer3D'));
@@ -13,6 +14,7 @@ const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { addToCart, getProductReviews, isInWishlist, addToWishlist, removeFromWishlist } = useStore();
+  const { t } = useLanguage();
 
   // Social proof - random number of viewers (demo)
   const [viewerCount, setViewerCount] = useState(0);
@@ -36,6 +38,8 @@ const ProductPage = () => {
   const [selectedColor, setSelectedColor] = useState<ProductColor>(product.colors[0]);
   const [quantity, setQuantity] = useState(1);
   const [addedToCart, setAddedToCart] = useState(false);
+  const [viewMode, setViewMode] = useState<'images' | '3d'>('images');
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   const inWishlist = isInWishlist(product.id);
 
@@ -65,19 +69,92 @@ const ProductPage = () => {
       <main className="pt-20 lg:pt-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8 lg:py-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
-            {/* 3D Viewer */}
+            {/* Image Gallery & 3D Viewer */}
             <div className="lg:sticky lg:top-28 lg:h-fit">
-              <Suspense fallback={
-                <div className="h-[400px] lg:h-[600px] bg-secondary/30 rounded-lg flex items-center justify-center">
-                  <div className="animate-pulse text-muted-foreground">Laden...</div>
+              {/* View Mode Tabs */}
+              <div className="flex gap-2 mb-4">
+                <button
+                  onClick={() => setViewMode('images')}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors ${
+                    viewMode === 'images'
+                      ? 'bg-foreground text-background'
+                      : 'bg-secondary text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  <ImageIcon size={16} />
+                  {t('product.photos')}
+                </button>
+                <button
+                  onClick={() => setViewMode('3d')}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors ${
+                    viewMode === '3d'
+                      ? 'bg-foreground text-background'
+                      : 'bg-secondary text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  <Box size={16} />
+                  {t('product.3dview')}
+                </button>
+              </div>
+
+              {/* Image Gallery */}
+              {viewMode === 'images' && (
+                <div className="space-y-4">
+                  {/* Main Image */}
+                  <div className="aspect-square bg-secondary/30 rounded-lg overflow-hidden">
+                    <img
+                      src={product.images[selectedImageIndex]}
+                      alt={`${product.name} - afbeelding ${selectedImageIndex + 1}`}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        // Fallback to placeholder if image doesn't exist
+                        e.currentTarget.src = '/placeholder.svg';
+                      }}
+                    />
+                  </div>
+
+                  {/* Thumbnail Navigation */}
+                  {product.images.length > 1 && (
+                    <div className="grid grid-cols-5 gap-2">
+                      {product.images.map((image, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setSelectedImageIndex(index)}
+                          className={`aspect-square rounded-lg overflow-hidden border-2 transition-all ${
+                            selectedImageIndex === index
+                              ? 'border-foreground scale-95'
+                              : 'border-transparent hover:border-muted'
+                          }`}
+                        >
+                          <img
+                            src={image}
+                            alt={`${product.name} thumbnail ${index + 1}`}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              e.currentTarget.src = '/placeholder.svg';
+                            }}
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              }>
-                <BagViewer3D
-                  className="w-full"
-                  selectedColor={selectedColor.value}
-                  colors={product.colors}
-                />
-              </Suspense>
+              )}
+
+              {/* 3D Viewer */}
+              {viewMode === '3d' && (
+                <Suspense fallback={
+                  <div className="h-[400px] lg:h-[600px] bg-secondary/30 rounded-lg flex items-center justify-center">
+                    <div className="animate-pulse text-muted-foreground">Laden...</div>
+                  </div>
+                }>
+                  <BagViewer3D
+                    className="w-full"
+                    selectedColor={selectedColor.value}
+                    colors={product.colors}
+                  />
+                </Suspense>
+              )}
             </div>
 
             {/* Product Info */}
@@ -114,11 +191,11 @@ const ProductPage = () => {
               <div className="flex items-center gap-4 text-sm">
                 <div className="flex items-center gap-1.5 text-muted-foreground">
                   <Eye size={14} />
-                  <span>{viewerCount} mensen bekijken dit nu</span>
+                  <span>{viewerCount} {t('product.viewing')}</span>
                 </div>
                 <div className="flex items-center gap-1.5 text-orange-600">
                   <Users size={14} />
-                  <span>Populair vandaag</span>
+                  <span>{t('product.popular')}</span>
                 </div>
               </div>
 
@@ -164,7 +241,7 @@ const ProductPage = () => {
               {/* Color Selection */}
               <div>
                 <label className="text-xs tracked-wide text-muted-foreground mb-3 block">
-                  KLEUR: {selectedColor.name}
+                  {t('product.color')}: {selectedColor.name}
                 </label>
                 <div className="flex gap-3">
                   {product.colors.map((color) => (
@@ -187,7 +264,7 @@ const ProductPage = () => {
               {/* Quantity */}
               <div>
                 <label className="text-xs tracked-wide text-muted-foreground mb-3 block">
-                  AANTAL
+                  {t('product.quantity')}
                 </label>
                 <div className="flex items-center gap-4">
                   <div className="flex items-center border border-border">
@@ -224,12 +301,12 @@ const ProductPage = () => {
                   {addedToCart ? (
                     <>
                       <Check size={18} className="mr-2" />
-                      TOEGEVOEGD
+                      {t('product.added')}
                     </>
                   ) : (
                     <>
                       <ShoppingBag size={18} className="mr-2" />
-                      TOEVOEGEN AAN WINKELWAGEN
+                      {t('product.addToCart')}
                     </>
                   )}
                 </Button>
@@ -238,7 +315,7 @@ const ProductPage = () => {
                   size="lg"
                   className="flex-1 h-14 text-sm tracked-wide bg-foreground text-background hover:bg-foreground/90"
                 >
-                  NU KOPEN
+                  {t('product.buyNow')}
                 </Button>
               </div>
 
@@ -247,22 +324,22 @@ const ProductPage = () => {
                 <div className="flex items-center gap-3 text-sm">
                   <Truck size={20} className="text-muted-foreground" />
                   <div>
-                    <p className="font-medium">Gratis verzending</p>
-                    <p className="text-xs text-muted-foreground">Vanaf €50</p>
+                    <p className="font-medium">{t('product.freeShipping')}</p>
+                    <p className="text-xs text-muted-foreground">{t('product.freeShipping.desc')}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
                   <RotateCcw size={20} className="text-muted-foreground" />
                   <div>
-                    <p className="font-medium">30 dagen retour</p>
-                    <p className="text-xs text-muted-foreground">Gratis retourneren</p>
+                    <p className="font-medium">{t('product.returns')}</p>
+                    <p className="text-xs text-muted-foreground">{t('product.returns.desc')}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
                   <Shield size={20} className="text-muted-foreground" />
                   <div>
-                    <p className="font-medium">2 jaar garantie</p>
-                    <p className="text-xs text-muted-foreground">Op alle tassen</p>
+                    <p className="font-medium">{t('product.warranty')}</p>
+                    <p className="text-xs text-muted-foreground">{t('product.warranty.desc')}</p>
                   </div>
                 </div>
               </div>

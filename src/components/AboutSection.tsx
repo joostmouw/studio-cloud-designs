@@ -1,4 +1,8 @@
+import { useLanguage } from "@/context/LanguageContext";
+
 const AboutSection = () => {
+  const { t } = useLanguage();
+
   return (
     <section id="about" className="py-24 lg:py-32 bg-cream">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
@@ -6,50 +10,47 @@ const AboutSection = () => {
           {/* Text Content */}
           <div>
             <p className="text-xs tracked-ultra text-muted-foreground mb-4">
-              THE ART OF SOFTNESS
+              {t('about.subtitle')}
             </p>
             <h2 className="text-3xl lg:text-4xl font-light text-foreground mb-8 leading-snug">
-              Where function meets sculptural design
+              {t('about.title')}
             </h2>
             <div className="space-y-6 text-muted-foreground">
               <p>
-                STUDIO CLOUD is geboren uit een simpele observatie: waarom moeten 
-                praktische tassen saai zijn? Onze collectie omarmt het 'puffy' 
-                silhouet — zacht, volume-rijk, maar onmiskenbaar stijlvol.
+                {t('about.text1')}
               </p>
               <p>
-                Elke tas wordt gemaakt met zachte, gewatteerde 'quilted' textuur, 
-                ruime hoofdvakken voor laptop en dagelijkse benodigdheden, en de 
-                verfijnde details die je verwacht van een premium merk.
+                {t('about.text2')}
               </p>
             </div>
             
             {/* Features */}
             <div className="grid grid-cols-2 gap-6 mt-12 pt-12 border-t border-border">
               <div>
-                <h4 className="text-sm font-medium text-foreground mb-2">Materiaal</h4>
-                <p className="text-sm text-muted-foreground">Premium quilted nylon</p>
+                <h4 className="text-sm font-medium text-foreground mb-2">{t('about.material')}</h4>
+                <p className="text-sm text-muted-foreground">{t('about.material.value')}</p>
               </div>
               <div>
-                <h4 className="text-sm font-medium text-foreground mb-2">Duurzaamheid</h4>
-                <p className="text-sm text-muted-foreground">Ontworpen voor jaren</p>
+                <h4 className="text-sm font-medium text-foreground mb-2">{t('about.durability')}</h4>
+                <p className="text-sm text-muted-foreground">{t('about.durability.value')}</p>
               </div>
               <div>
-                <h4 className="text-sm font-medium text-foreground mb-2">Formaat</h4>
-                <p className="text-sm text-muted-foreground">Past 15" laptop</p>
+                <h4 className="text-sm font-medium text-foreground mb-2">{t('about.size')}</h4>
+                <p className="text-sm text-muted-foreground">{t('about.size.value')}</p>
               </div>
               <div>
-                <h4 className="text-sm font-medium text-foreground mb-2">Kleuren</h4>
-                <p className="text-sm text-muted-foreground">Stone, Black, Cream</p>
+                <h4 className="text-sm font-medium text-foreground mb-2">{t('about.colors')}</h4>
+                <p className="text-sm text-muted-foreground">{t('about.colors.value')}</p>
               </div>
             </div>
           </div>
 
-          {/* Image */}
-          <div className="relative">
-            <div className="aspect-[4/5] bg-secondary" />
-            <div className="absolute bottom-6 right-6 bg-background px-6 py-4">
-              <p className="text-xs tracked-wide text-muted-foreground">SINCE 2024</p>
+          {/* Brand Badge */}
+          <div className="flex items-center justify-center lg:justify-end">
+            <div className="border-2 border-border px-12 py-8 text-center">
+              <p className="text-xs tracked-ultra text-muted-foreground mb-2">{t('about.est')}</p>
+              <p className="text-4xl font-light text-foreground">2024</p>
+              <p className="text-xs tracked-wide text-muted-foreground mt-2">{t('about.brand')}</p>
             </div>
           </div>
         </div>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ShoppingBag, Menu, X, User } from "lucide-react";
 import { useStore } from "@/context/StoreContext";
+import LanguageSelector from "./LanguageSelector";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -45,7 +46,12 @@ const Navigation = () => {
           </div>
 
           {/* Cart, Account & Mobile Menu */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            {/* Language Selector */}
+            <div className="hidden sm:block">
+              <LanguageSelector />
+            </div>
+
             {/* Account */}
             <button
               onClick={() => navigate(isAuthenticated ? '/account' : '/login')}
