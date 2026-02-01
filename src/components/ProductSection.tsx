@@ -1,38 +1,62 @@
 import ProductCard from "./ProductCard";
-// WebP images for better performance, with JPG fallback
-import toteStoneWebP from "@/assets/tote-stone.webp";
-import toteBlackWebP from "@/assets/tote-black.webp";
-import toteCreamWebP from "@/assets/tote-cream.webp";
-import toteStone from "@/assets/tote-stone.jpg";
-import toteBlack from "@/assets/tote-black.jpg";
-import toteCream from "@/assets/tote-cream.jpg";
+
+// Weekend Tote images in different colors
+const weekendToteWhiteImages = [
+  "/products/weekend-tote/1-white.jpg",
+  "/products/weekend-tote/2-white.jpg",
+  "/products/weekend-tote/3-white.jpg",
+  "/products/weekend-tote/4-white.jpg",
+  "/products/weekend-tote/5-white.jpg",
+  "/products/weekend-tote/6-white.jpg",
+  "/products/weekend-tote/7-white.jpg",
+];
+
+const weekendToteBlackImages = [
+  "/products/weekend-tote/1-black.jpg",
+  "/products/weekend-tote/2-black.jpg",
+  "/products/weekend-tote/3-black.jpg",
+  "/products/weekend-tote/4-black.jpg",
+  "/products/weekend-tote/5-black.jpg",
+  "/products/weekend-tote/6-black.jpg",
+  "/products/weekend-tote/7-black.jpg",
+];
+
+const weekendToteGreenImages = [
+  "/products/weekend-tote/1-green.jpg",
+  "/products/weekend-tote/2-green.jpg",
+  "/products/weekend-tote/3-green.jpg",
+  "/products/weekend-tote/4-green.jpg",
+  "/products/weekend-tote/5-green.jpg",
+  "/products/weekend-tote/6-green.jpg",
+  "/products/weekend-tote/7-green.jpg",
+];
 
 const products = [
   {
-    id: 1,
-    name: "The Cloud Tote No. 1",
+    id: "weekend-tote-white",
+    name: "Weekend Tote — Off-White",
     price: "€34,95",
-    image: toteCream,
-    imageWebP: toteCreamWebP,
-    colors: ["#F5F0E8", "#A8A39D", "#1A1A1A"],
+    image: weekendToteWhiteImages[0],
+    images: weekendToteWhiteImages.slice(1), // Preview images (2-7)
+    colors: ["#F5F0E8", "#2A2A2A", "#5C6B4A"],
     isNew: true,
   },
   {
-    id: 2,
-    name: "The Cloud Tote — Stone",
+    id: "weekend-tote-black",
+    name: "Weekend Tote — Black",
     price: "€34,95",
-    image: toteStone,
-    imageWebP: toteStoneWebP,
-    colors: ["#A8A39D", "#F5F0E8", "#1A1A1A"],
+    image: weekendToteBlackImages[0],
+    images: weekendToteBlackImages.slice(1), // Preview images (2-7)
+    colors: ["#F5F0E8", "#2A2A2A", "#5C6B4A"],
     isNew: false,
   },
   {
-    id: 3,
-    name: "The Cloud Tote — Midnight",
+    id: "weekend-tote-green",
+    name: "Weekend Tote — Green",
     price: "€34,95",
-    image: toteBlack,
-    imageWebP: toteBlackWebP,
-    colors: ["#1A1A1A", "#A8A39D", "#F5F0E8"],
+    image: weekendToteGreenImages[0],
+    images: weekendToteGreenImages.slice(1), // Preview images (2-7)
+    colors: ["#F5F0E8", "#2A2A2A", "#5C6B4A"],
     isNew: false,
   },
 ];
@@ -60,10 +84,11 @@ const ProductSection = () => {
           {products.map((product) => (
             <ProductCard
               key={product.id}
+              id={product.id}
               name={product.name}
               price={product.price}
               image={product.image}
-              imageWebP={product.imageWebP}
+              images={product.images}
               colors={product.colors}
               isNew={product.isNew}
             />
