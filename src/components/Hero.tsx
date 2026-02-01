@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import heroImageWebP from "@/assets/hero-tote.webp";
 import heroImage from "@/assets/hero-tote.jpg";
@@ -38,7 +39,7 @@ const Hero = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-delay-2">
             <Button variant="hero" asChild>
-              <a href="#collection">SHOP COLLECTION</a>
+              <Link to="/product/hobo-bag-1">SHOP NOW</Link>
             </Button>
             <Button variant="hero-outline" asChild>
               <a href="#about">OUR STORY</a>

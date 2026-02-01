@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface ProductCardProps {
+  id?: string;
   name: string;
   price: string;
   image: string;
@@ -9,13 +11,14 @@ interface ProductCardProps {
   isNew?: boolean;
 }
 
-const ProductCard = ({ name, price, image, imageWebP, colors, isNew }: ProductCardProps) => {
+const ProductCard = ({ id = "hobo-bag-1", name, price, image, imageWebP, colors, isNew }: ProductCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   return (
-    <div
-      className="group cursor-pointer"
+    <Link
+      to={`/product/${id}`}
+      className="group cursor-pointer block"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -44,15 +47,15 @@ const ProductCard = ({ name, price, image, imageWebP, colors, isNew }: ProductCa
           />
         </picture>
         
-        {/* Quick Add Overlay */}
-        <div 
+        {/* View Product Overlay */}
+        <div
           className={`absolute inset-0 bg-foreground/5 flex items-end justify-center pb-6 transition-opacity duration-300 ${
             isHovered ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          <button className="bg-background text-foreground text-xs tracked-wide px-6 py-3 hover:bg-foreground hover:text-background transition-colors">
-            QUICK ADD
-          </button>
+          <span className="bg-background text-foreground text-xs tracked-wide px-6 py-3 hover:bg-foreground hover:text-background transition-colors">
+            BEKIJK PRODUCT
+          </span>
         </div>
       </div>
 
@@ -75,7 +78,7 @@ const ProductCard = ({ name, price, image, imageWebP, colors, isNew }: ProductCa
           ))}
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

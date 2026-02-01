@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Environment, ContactShadows } from '@react-three/drei';
-import { useState, memo } from 'react';
+import { OrbitControls, Environment, ContactShadows, useGLTF, Center } from '@react-three/drei';
+import { useState, memo, useEffect } from 'react';
 import * as THREE from 'three';
 
 interface BagModelProps {
@@ -8,71 +8,48 @@ interface BagModelProps {
 }
 
 const BagModel = memo(({ color }: BagModelProps) => {
-  // Create a slouchy canvas bag shape using bezier curves
-  const bagShape = new THREE.Shape();
-  
-  // Draw the front profile of the bag - rounded bottom, wider top
-  bagShape.moveTo(-1.5, 0);
-  bagShape.quadraticCurveTo(-1.8, 1.2, -1.4, 2.2);
-  bagShape.lineTo(-1.2, 2.4);
-  bagShape.lineTo(1.2, 2.4);
-  bagShape.lineTo(1.4, 2.2);
-  bagShape.quadraticCurveTo(1.8, 1.2, 1.5, 0);
-  bagShape.quadraticCurveTo(0, -0.3, -1.5, 0);
+  const { scene } = useGLTF('/bag-model.glb');
 
-  const extrudeSettings = {
-    steps: 1,
-    depth: 0.8,
-    bevelEnabled: true,
-    bevelThickness: 0.15,
-    bevelSize: 0.15,
-    bevelOffset: 0,
-    bevelSegments: 8,
-  };
+  // Clone the scene to avoid modifying the cached original
+  useEffect(() => {
+    scene.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        // Clone the material so we don't modify the cached version
+        if (child.material) {
+          child.material = child.material.clone();
+
+          // Apply the selected color
+          if (child.material instanceof THREE.MeshStandardMaterial) {
+            child.material.color.set(color);
+            child.material.roughness = 0.85;
+            child.material.metalness = 0;
+            child.material.needsUpdate = true;
+          } else if (child.material instanceof THREE.MeshBasicMaterial) {
+            child.material.color.set(color);
+            child.material.needsUpdate = true;
+          }
+        }
+
+        // Enable shadows
+        child.castShadow = true;
+        child.receiveShadow = true;
+      }
+    });
+  }, [scene, color]);
 
   return (
-    <group rotation={[0.1, 0, 0]} position={[0, -0.5, 0]}>
-      {/* Main bag body */}
-      <mesh position={[0, 0, -0.4]} castShadow>
-        <extrudeGeometry args={[bagShape, extrudeSettings]} />
-        <meshStandardMaterial 
-          color={color} 
-          roughness={0.85} 
-          metalness={0}
-          side={THREE.DoubleSide}
-        />
-      </mesh>
-      
-      {/* Shoulder strap */}
-      <mesh position={[0, 2.8, 0]} castShadow>
-        <torusGeometry args={[1.2, 0.12, 8, 32, Math.PI]} />
-        <meshStandardMaterial color={color} roughness={0.85} metalness={0} />
-      </mesh>
-      
-      {/* Strap connectors */}
-      <mesh position={[-1.05, 2.35, 0]} castShadow>
-        <cylinderGeometry args={[0.08, 0.08, 0.3, 16]} />
-        <meshStandardMaterial color={color} roughness={0.85} metalness={0} />
-      </mesh>
-      <mesh position={[1.05, 2.35, 0]} castShadow>
-        <cylinderGeometry args={[0.08, 0.08, 0.3, 16]} />
-        <meshStandardMaterial color={color} roughness={0.85} metalness={0} />
-      </mesh>
-      
-      {/* Pocket on front */}
-      <mesh position={[0, 0.8, 0.42]} castShadow>
-        <boxGeometry args={[1.4, 1.2, 0.05]} />
-        <meshStandardMaterial color={color} roughness={0.9} metalness={0} />
-      </mesh>
-      
-      {/* Pocket seam line */}
-      <mesh position={[0, 0.2, 0.45]}>
-        <boxGeometry args={[1.35, 0.02, 0.01]} />
-        <meshStandardMaterial color="#888" roughness={0.5} />
-      </mesh>
-    </group>
+    <Center>
+      <primitive
+        object={scene}
+        scale={2.5}
+        rotation={[0, Math.PI / 4, 0]}
+      />
+    </Center>
   );
 });
+
+// Preload the model
+useGLTF.preload('/bag-model.glb');
 
 interface BagViewer3DProps {
   className?: string;
@@ -80,7 +57,7 @@ interface BagViewer3DProps {
 
 const BagViewer3D = memo(({ className = "" }: BagViewer3DProps) => {
   const [selectedColor, setSelectedColor] = useState("#F5F0E8");
-  
+
   const colors = [
     { name: "Cream", value: "#F5F0E8" },
     { name: "Stone", value: "#A8A39D" },
@@ -93,7 +70,7 @@ const BagViewer3D = memo(({ className = "" }: BagViewer3DProps) => {
     <div className={`${className}`}>
       <div className="h-[300px] sm:h-[400px] lg:h-[500px] xl:h-[600px] w-full bg-secondary/30 rounded-lg overflow-hidden relative">
         <Canvas
-          camera={{ position: [0, 1, 6], fov: 35 }}
+          camera={{ position: [0, 0.5, 4], fov: 45 }}
           shadows
           dpr={[1, 1.5]}
           gl={{
@@ -101,45 +78,55 @@ const BagViewer3D = memo(({ className = "" }: BagViewer3DProps) => {
             powerPreference: "high-performance",
           }}
         >
-          <ambientLight intensity={0.5} />
+          {/* Soft ambient light for canvas material */}
+          <ambientLight intensity={0.7} />
+
+          {/* Main key light - soft and diffused like natural light */}
           <directionalLight
-            position={[5, 5, 5]}
+            position={[5, 8, 5]}
             intensity={1}
             castShadow
-            shadow-mapSize={[512, 512]}
+            shadow-mapSize={[1024, 1024]}
+            shadow-bias={-0.0001}
           />
-          <directionalLight position={[-5, 3, -5]} intensity={0.3} />
-          
+
+          {/* Fill light from the other side */}
+          <directionalLight position={[-5, 5, -3]} intensity={0.5} />
+
+          {/* Subtle rim light for depth */}
+          <directionalLight position={[0, 4, -5]} intensity={0.3} />
+
           <BagModel color={selectedColor} />
-          
-          <ContactShadows 
-            position={[0, -1.5, 0]} 
-            opacity={0.4} 
-            scale={8} 
-            blur={2} 
-            far={3}
+
+          <ContactShadows
+            position={[0, -1, 0]}
+            opacity={0.5}
+            scale={8}
+            blur={2.5}
+            far={4}
+            resolution={256}
           />
-          
-          <Environment preset="studio" />
-          
+
+          <Environment preset="apartment" />
+
           <OrbitControls
             enableZoom={false}
             enablePan={false}
             enableDamping={true}
             dampingFactor={0.05}
             minPolarAngle={Math.PI / 4}
-            maxPolarAngle={Math.PI / 1.8}
+            maxPolarAngle={Math.PI / 1.7}
             autoRotate
-            autoRotateSpeed={1}
+            autoRotateSpeed={0.8}
           />
         </Canvas>
-        
+
         {/* Instruction overlay */}
         <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 text-[11px] sm:text-xs text-muted-foreground bg-background/80 backdrop-blur-sm px-2 sm:px-3 py-1 sm:py-1.5 rounded-full">
           Sleep om te draaien
         </div>
       </div>
-      
+
       {/* Color selector */}
       <div className="flex items-center justify-center gap-2 sm:gap-3 mt-4 sm:mt-6">
         <span className="text-[10px] sm:text-xs text-muted-foreground tracked-wide">KLEUR:</span>
