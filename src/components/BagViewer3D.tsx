@@ -3,6 +3,12 @@ import { OrbitControls, Environment, ContactShadows, useGLTF, Center } from '@re
 import { useState, memo, useEffect } from 'react';
 import * as THREE from 'three';
 import { useLanguage } from '@/context/LanguageContext';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 interface BagModelProps {
   color: string;
@@ -155,23 +161,30 @@ const BagViewer3D = memo(({
 
       {/* Color selector - only show if no external color selector */}
       {!externalSelectedColor && (
-        <div className="flex items-center justify-center gap-2 sm:gap-3 mt-4 sm:mt-6">
-          <span className="text-[10px] sm:text-xs text-muted-foreground tracked-wide">KLEUR:</span>
-          {colors.map((color) => (
-            <button
-              key={color.name}
-              onClick={() => handleColorChange(color.value)}
-              className={`w-5 sm:w-6 h-5 sm:h-6 rounded-full border-2 transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-foreground ${
-                selectedColor === color.value
-                  ? 'border-foreground scale-110'
-                  : 'border-transparent'
-              }`}
-              style={{ backgroundColor: color.value }}
-              title={color.name}
-              aria-label={`Select ${color.name} color`}
-            />
-          ))}
-        </div>
+        <TooltipProvider>
+          <div className="flex items-center justify-center gap-2 sm:gap-3 mt-4 sm:mt-6">
+            <span className="text-[10px] sm:text-xs text-muted-foreground tracked-wide">KLEUR:</span>
+            {colors.map((color) => (
+              <Tooltip key={color.name}>
+                <TooltipTrigger asChild>
+                  <button
+                    onClick={() => handleColorChange(color.value)}
+                    className={`w-5 sm:w-6 h-5 sm:h-6 rounded-full border-2 transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-foreground ${
+                      selectedColor === color.value
+                        ? 'border-foreground scale-110'
+                        : 'border-transparent'
+                    }`}
+                    style={{ backgroundColor: color.value }}
+                    aria-label={`Select ${color.name} color`}
+                  />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p className="text-xs">{color.name}</p>
+                </TooltipContent>
+              </Tooltip>
+            ))}
+          </div>
+        </TooltipProvider>
       )}
     </div>
   );

@@ -31,32 +31,39 @@ const weekendToteGreenImages = [
   "/products/weekend-tote/7-green.jpg",
 ];
 
+// Color palette for Weekend Tote with proper names
+const WEEKEND_TOTE_COLORS = [
+  { name: "Off-White", value: "#F5F0E8" },
+  { name: "Midnight", value: "#2A2A2A" },
+  { name: "Olive Green", value: "#5C6B4A" },
+];
+
 const products = [
   {
     id: "weekend-tote-white",
-    name: "Weekend Tote — Off-White",
+    name: "The Cloud Tote No. 1",
     price: "€34,95",
     image: weekendToteWhiteImages[0],
     images: weekendToteWhiteImages.slice(1), // Preview images (2-7)
-    colors: ["#F5F0E8", "#2A2A2A", "#5C6B4A"],
+    colors: WEEKEND_TOTE_COLORS,
     isNew: true,
   },
   {
     id: "weekend-tote-black",
-    name: "Weekend Tote — Black",
+    name: "The Cloud Tote — Midnight",
     price: "€34,95",
     image: weekendToteBlackImages[0],
     images: weekendToteBlackImages.slice(1), // Preview images (2-7)
-    colors: ["#F5F0E8", "#2A2A2A", "#5C6B4A"],
+    colors: WEEKEND_TOTE_COLORS,
     isNew: false,
   },
   {
     id: "weekend-tote-green",
-    name: "Weekend Tote — Green",
+    name: "The Cloud Tote — Green",
     price: "€34,95",
     image: weekendToteGreenImages[0],
     images: weekendToteGreenImages.slice(1), // Preview images (2-7)
-    colors: ["#F5F0E8", "#2A2A2A", "#5C6B4A"],
+    colors: WEEKEND_TOTE_COLORS,
     isNew: false,
   },
 ];

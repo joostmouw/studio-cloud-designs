@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+interface ColorOption {
+  name: string;
+  value: string;
+}
+
 interface ProductCardProps {
   id?: string;
   name: string;
@@ -8,7 +13,7 @@ interface ProductCardProps {
   image: string;
   imageWebP?: string;
   images?: string[];  // Additional images for hover preview
-  colors: string[];
+  colors: (string | ColorOption)[];  // Support both hex strings and color objects
   isNew?: boolean;
 }
 
@@ -99,16 +104,21 @@ const ProductCard = ({ id = "hobo-bag-1", name, price, image, imageWebP, images 
 
         {/* Color Swatches */}
         <div className="flex gap-2 pt-1">
-          {colors.map((color, index) => (
-            <div
-              key={index}
-              className="w-3 sm:w-4 h-3 sm:h-4 border border-border cursor-pointer hover:scale-110 transition-transform rounded-sm"
-              style={{ backgroundColor: color }}
-              title={color}
-              role="button"
-              tabIndex={0}
-            />
-          ))}
+          {colors.map((color, index) => {
+            const colorValue = typeof color === 'string' ? color : color.value;
+            const colorName = typeof color === 'string' ? color : color.name;
+
+            return (
+              <div
+                key={index}
+                className="w-3 sm:w-4 h-3 sm:h-4 border border-border cursor-pointer hover:scale-110 transition-transform rounded-sm"
+                style={{ backgroundColor: colorValue }}
+                title={colorName}
+                role="button"
+                tabIndex={0}
+              />
+            );
+          })}
         </div>
       </div>
     </Link>
