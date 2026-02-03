@@ -11,7 +11,7 @@ export default function Cancel() {
       <Card>
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <XCircle className="w-16 h-16 text-orange-500" />
+            <XCircle className="w-16 h-16 text-foreground" />
           </div>
           <CardTitle className="text-2xl">Payment Cancelled</CardTitle>
           <CardDescription>

@@ -174,7 +174,7 @@ const CheckoutPage = () => {
                   step === s
                     ? 'bg-foreground text-background'
                     : index < ['address', 'shipping', 'payment'].indexOf(step)
-                      ? 'bg-green-500 text-white'
+                      ? 'bg-foreground/10 text-white'
                       : 'bg-secondary text-muted-foreground'
                 }`}>
                   {index < ['address', 'shipping', 'payment'].indexOf(step) ? (

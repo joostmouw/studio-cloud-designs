@@ -120,8 +120,8 @@ const NewsletterPopup = () => {
               </>
             ) : (
               <div className="text-center py-8">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Gift size={32} className="text-green-600" />
+                <div className="w-16 h-16 bg-foreground/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Gift size={32} className="text-foreground" />
                 </div>
                 <h3 className="text-lg font-medium mb-2">Welkom!</h3>
                 <p className="text-sm text-muted-foreground">

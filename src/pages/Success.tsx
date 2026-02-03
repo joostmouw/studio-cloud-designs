@@ -17,7 +17,7 @@ export default function Success() {
       <Card>
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <CheckCircle className="w-16 h-16 text-green-500" />
+            <CheckCircle className="w-16 h-16 text-foreground" />
           </div>
           <CardTitle className="text-2xl">Payment Successful!</CardTitle>
           <CardDescription>

@@ -274,10 +274,10 @@ const AccountPage = () => {
                             <span className="font-medium">{order.orderNumber}</span>
                             <span className={`text-xs px-2 py-0.5 rounded ${
                               order.status === 'delivered'
-                                ? 'bg-green-100 text-green-700'
+                                ? 'bg-foreground/10 text-foreground'
                                 : order.status === 'shipped'
                                   ? 'bg-blue-100 text-blue-700'
-                                  : 'bg-yellow-100 text-yellow-700'
+                                  : 'bg-yellow-100 text-foreground'
                             }`}>
                               {order.status === 'confirmed' && 'Bevestigd'}
                               {order.status === 'shipped' && 'Verzonden'}

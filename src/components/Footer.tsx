@@ -76,7 +76,7 @@ const Footer = () => {
             {/* Social Links */}
             <div className="flex gap-4">
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/studiocloud"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-background/10 flex items-center justify-center hover:bg-background/20 transition-colors"
@@ -85,7 +85,7 @@ const Footer = () => {
                 <Instagram size={18} />
               </a>
               <a
-                href="https://facebook.com"
+                href="https://facebook.com/studiocloud"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-background/10 flex items-center justify-center hover:bg-background/20 transition-colors"
@@ -140,36 +140,9 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-sm text-background/80 hover:text-background transition-colors">
+                <a href="mailto:hello@studiocloud.store" className="text-sm text-background/80 hover:text-background transition-colors">
                   Contact
-                </Link>
-              </li>
-              <li>
-                <Link to="/size-guide" className="text-sm text-background/80 hover:text-background transition-colors">
-                  Maatgids
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Over Ons */}
-          <div>
-            <h4 className="text-xs tracked-wide mb-4 text-background/40">OVER ONS</h4>
-            <ul className="space-y-3">
-              <li>
-                <Link to="/about" className="text-sm text-background/80 hover:text-background transition-colors">
-                  Ons Verhaal
-                </Link>
-              </li>
-              <li>
-                <Link to="/sustainability" className="text-sm text-background/80 hover:text-background transition-colors">
-                  Duurzaamheid
-                </Link>
-              </li>
-              <li>
-                <Link to="/materials" className="text-sm text-background/80 hover:text-background transition-colors">
-                  Materialen
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
@@ -191,11 +164,6 @@ const Footer = () => {
               <li>
                 <Link to="/account/orders" className="text-sm text-background/80 hover:text-background transition-colors">
                   Bestellingen
-                </Link>
-              </li>
-              <li>
-                <Link to="/wishlist" className="text-sm text-background/80 hover:text-background transition-colors">
-                  Wishlist
                 </Link>
               </li>
             </ul>
@@ -225,13 +193,9 @@ const Footer = () => {
           <p className="text-xs text-background/40">
             © {new Date().getFullYear()} Studio Cloud. Alle rechten voorbehouden.
           </p>
-          <div className="flex gap-6">
-            <Link to="/privacy" className="text-xs text-background/40 hover:text-background transition-colors">
-              Privacy Policy
-            </Link>
-            <Link to="/terms" className="text-xs text-background/40 hover:text-background transition-colors">
-              Algemene Voorwaarden
-            </Link>
+          <div className="flex gap-6 text-xs text-background/40">
+            <span>Privacy Policy</span>
+            <span>Algemene Voorwaarden</span>
             <Link to="/cookies" className="text-xs text-background/40 hover:text-background transition-colors">
               Cookies
             </Link>

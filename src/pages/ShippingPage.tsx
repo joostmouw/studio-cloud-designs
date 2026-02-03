@@ -73,8 +73,8 @@ const ShippingPage = () => {
               </div>
             </div>
 
-            <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-              <p className="text-sm text-green-800">
+            <div className="mt-6 p-4 bg-foreground/10 border border-green-200 rounded-lg">
+              <p className="text-sm text-foreground">
                 <strong>Gratis verzending</strong> bij bestellingen vanaf €50
               </p>
             </div>
@@ -89,7 +89,7 @@ const ShippingPage = () => {
 
             <div className="space-y-4">
               <div className="flex gap-4">
-                <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-0.5" />
+                <CheckCircle2 size={20} className="text-foreground flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="font-medium">Track & Trace</p>
                   <p className="text-sm text-muted-foreground">
@@ -98,7 +98,7 @@ const ShippingPage = () => {
                 </div>
               </div>
               <div className="flex gap-4">
-                <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-0.5" />
+                <CheckCircle2 size={20} className="text-foreground flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="font-medium">Flexibele bezorging</p>
                   <p className="text-sm text-muted-foreground">
@@ -107,7 +107,7 @@ const ShippingPage = () => {
                 </div>
               </div>
               <div className="flex gap-4">
-                <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-0.5" />
+                <CheckCircle2 size={20} className="text-foreground flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="font-medium">Verzendgebied</p>
                   <p className="text-sm text-muted-foreground">

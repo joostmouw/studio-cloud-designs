@@ -38,8 +38,8 @@ const OrderConfirmationPage = () => {
         <div className="max-w-3xl mx-auto px-6 lg:px-12 py-8 lg:py-12">
           {/* Success Header */}
           <div className="text-center mb-12">
-            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <CheckCircle2 size={48} className="text-green-600" />
+            <div className="w-20 h-20 bg-foreground/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <CheckCircle2 size={48} className="text-foreground" />
             </div>
             <h1 className="text-2xl lg:text-3xl font-light tracking-wide mb-2">
               Bedankt voor je bestelling!
@@ -58,7 +58,7 @@ const OrderConfirmationPage = () => {
               </div>
               <div className="text-left sm:text-right">
                 <p className="text-sm text-muted-foreground">Status</p>
-                <span className="inline-flex items-center gap-1 text-green-600 font-medium">
+                <span className="inline-flex items-center gap-1 text-foreground font-medium">
                   <CheckCircle2 size={16} />
                   Bevestigd
                 </span>
@@ -168,7 +168,7 @@ const OrderConfirmationPage = () => {
             <h3 className="font-medium mb-4">Wat gebeurt er nu?</h3>
             <div className="space-y-4">
               <div className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full bg-green-500 text-white flex items-center justify-center text-xs font-medium flex-shrink-0">
+                <div className="w-6 h-6 rounded-full bg-foreground/10 text-white flex items-center justify-center text-xs font-medium flex-shrink-0">
                   1
                 </div>
                 <div>

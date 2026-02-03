@@ -167,7 +167,7 @@ const RegisterPage = () => {
                   <div
                     key={index}
                     className={`flex items-center gap-2 text-xs ${
-                      req.met ? 'text-green-600' : 'text-muted-foreground'
+                      req.met ? 'text-foreground' : 'text-muted-foreground'
                     }`}
                   >
                     <Check size={12} className={req.met ? 'opacity-100' : 'opacity-0'} />

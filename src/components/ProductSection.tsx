@@ -104,11 +104,11 @@ const ProductSection = () => {
 
         {/* View All */}
         <div className="text-center mt-16">
-          <a 
-            href="#" 
+          <a
+            href="/#collection"
             className="inline-block text-xs tracked-wide text-foreground underline underline-offset-4 hover:opacity-60 transition-opacity"
           >
-            VIEW ALL PRODUCTS
+            ALLE PRODUCTEN BEKIJKEN
           </a>
         </div>
       </div>

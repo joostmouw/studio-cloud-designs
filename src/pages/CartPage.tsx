@@ -53,7 +53,7 @@ const CartPage = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className="bg-green-50 text-green-700 p-4 rounded-lg">
+                  <div className="bg-foreground/10 text-foreground p-4 rounded-lg">
                     <p className="text-sm font-medium">🎉 Je komt in aanmerking voor gratis verzending!</p>
                   </div>
                 )}

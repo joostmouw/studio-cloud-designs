@@ -209,7 +209,7 @@ const ProductPage = () => {
                   <Eye size={14} />
                   <span>{viewerCount} {t('product.viewing')}</span>
                 </div>
-                <div className="flex items-center gap-1.5 text-orange-600">
+                <div className="flex items-center gap-1.5 text-foreground/70">
                   <Users size={14} />
                   <span>{t('product.popular')}</span>
                 </div>
@@ -227,7 +227,7 @@ const ProductPage = () => {
                     </span>
                     {reviews.length > 0 && (
                       <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                        <Star size={14} className="fill-yellow-400 text-yellow-400" />
+                        <Star size={14} className="fill-foreground text-foreground" />
                         <span>{averageRating.toFixed(1)}</span>
                         <span>({reviews.length} reviews)</span>
                       </div>
@@ -240,7 +240,7 @@ const ProductPage = () => {
                   onClick={handleWishlistToggle}
                   className={`p-2 rounded-full border transition-colors ${
                     inWishlist
-                      ? 'bg-red-50 border-red-200 text-red-500'
+                      ? 'bg-foreground/10 border-foreground text-foreground'
                       : 'border-border hover:border-foreground text-muted-foreground hover:text-foreground'
                   }`}
                   aria-label={inWishlist ? 'Verwijder uit wishlist' : 'Voeg toe aan wishlist'}
@@ -398,14 +398,14 @@ const ProductPage = () => {
                             key={star}
                             size={14}
                             className={star <= review.rating
-                              ? 'fill-yellow-400 text-yellow-400'
+                              ? 'fill-foreground text-foreground'
                               : 'text-muted-foreground'}
                           />
                         ))}
                       </div>
                       <span className="font-medium text-sm">{review.userName}</span>
                       {review.verified && (
-                        <span className="text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded">
+                        <span className="text-xs text-foreground bg-foreground/10 px-2 py-0.5 rounded">
                           Geverifieerde aankoop
                         </span>
                       )}
