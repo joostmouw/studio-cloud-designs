@@ -4,6 +4,7 @@ import { useStore, PRODUCTS } from '@/context/StoreContext';
 import { useLanguage } from '@/context/LanguageContext';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import ProductVideoHero from '@/components/ProductVideoHero';
 import { Button } from '@/components/ui/button';
 import { Minus, Plus, ShoppingBag, Check, Star, Truck, RotateCcw, Shield, Heart, Eye, Users, Image as ImageIcon, Box } from 'lucide-react';
 import { ProductColor } from '@/types';
@@ -68,6 +69,11 @@ const ProductPage = () => {
 
       <main className="pt-20 lg:pt-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8 lg:py-12">
+          {/* Product Video Hero */}
+          <div className="mb-12 lg:mb-16">
+            <ProductVideoHero />
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
             {/* Image Gallery & 3D Viewer */}
             <div className="lg:sticky lg:top-28 lg:h-fit">
