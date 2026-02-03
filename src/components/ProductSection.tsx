@@ -33,9 +33,9 @@ const weekendToteGreenImages = [
 
 // Color palette for Weekend Tote with proper names
 const WEEKEND_TOTE_COLORS = [
-  { name: "Off-White", value: "#F5F0E8" },
-  { name: "Midnight", value: "#2A2A2A" },
-  { name: "Olive Green", value: "#5C6B4A" },
+  { name: "Off White", value: "#F5F0E8" },
+  { name: "Midnight Black", value: "#2A2A2A" },
+  { name: "Moss Green", value: "#5C6B4A" },
 ];
 
 const products = [

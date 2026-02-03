@@ -74,11 +74,9 @@ const BagViewer3D = memo(({
   const { t } = useLanguage();
 
   const defaultColors = [
-    { name: "Cream", value: "#F5F0E8" },
-    { name: "Stone", value: "#A8A39D" },
-    { name: "Black", value: "#2A2A2A" },
-    { name: "Olive", value: "#5C6B4A" },
-    { name: "Coral", value: "#C97B6B" },
+    { name: "Off White", value: "#F5F0E8" },
+    { name: "Midnight Black", value: "#2A2A2A" },
+    { name: "Moss Green", value: "#5C6B4A" },
   ];
 
   const colors = externalColors || defaultColors;
