@@ -10,12 +10,16 @@ export const PRODUCTS: Product[] = [
     price: 34.95,
     images: [
       '/products/weekend-tote/1-white.jpg',
+      '/products/weekend-tote/2-white.jpg',
+      '/products/weekend-tote/3-white.jpg',
       '/products/weekend-tote/6-white.jpg',
       '/products/weekend-tote/7-white.jpg',
     ],
     imagesByColor: {
       '#F5F0E8': [
         '/products/weekend-tote/1-white.jpg',
+        '/products/weekend-tote/2-white.jpg',
+        '/products/weekend-tote/3-white.jpg',
         '/products/weekend-tote/6-white.jpg',
         '/products/weekend-tote/7-white.jpg',
       ],
