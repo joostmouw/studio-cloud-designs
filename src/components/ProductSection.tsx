@@ -1,3 +1,4 @@
+import { useLanguage } from "@/context/LanguageContext";
 import ProductCard from "./ProductCard";
 
 // Weekend Tote images in different colors (only existing files)
@@ -55,6 +56,8 @@ const products = [
 ];
 
 const ProductSection = () => {
+  const { t } = useLanguage();
+
   return (
     <section id="collection" className="py-20 sm:py-24 lg:py-32 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
@@ -67,8 +70,7 @@ const ProductSection = () => {
             Daily Essentials, Reimagined
           </h2>
           <p className="text-muted-foreground max-w-lg mx-auto">
-            Lichtgewicht, ruim en ontworpen om jarenlang gedragen te worden.
-            Of je nu onderweg bent naar de studio of de stad verkent.
+            {t('product.collection.desc')}
           </p>
         </div>
 

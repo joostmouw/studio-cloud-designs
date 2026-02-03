@@ -63,6 +63,7 @@ export const translations = {
     'product.classicShoulder.desc': 'A timeless shoulder bag with a refined appearance. Crafted from high-quality leather with luxury finishing. Perfect for both casual and formal occasions.',
     'product.urbanBackpack.desc': 'Modern backpack with laptop compartment and thoughtful design. Ideal for daily commuting or a weekend getaway. Durable materials and ergonomic design.',
     'product.travelDuffel.desc': 'Spacious weekend bag with reinforced handles and adjustable shoulder strap. Extra large capacity for all your travel essentials. Water-resistant and durable.',
+    'product.collection.desc': 'Lightweight, spacious and designed to last for years. Whether you\'re heading to the studio or exploring the city.',
 
     // Colors
     'color.offwhite': 'Off White',
@@ -159,6 +160,7 @@ export const translations = {
     'product.classicShoulder.desc': 'Een tijdloze schoudertas met een verfijnde uitstraling. Gemaakt van hoogwaardig leer met luxe afwerking. Perfect voor zowel casual als formele gelegenheden.',
     'product.urbanBackpack.desc': 'Moderne rugzak met laptop compartiment en doordacht ontwerp. Ideaal voor dagelijks woon-werk verkeer of een weekendje weg. Duurzame materialen en ergonomisch ontwerp.',
     'product.travelDuffel.desc': 'Ruime weekendtas met verstevigde handvatten en verstelbare schouderband. Extra grote capaciteit voor al je reisbenodigdheden. Waterafstotend en slijtvast.',
+    'product.collection.desc': 'Lichtgewicht, ruim en ontworpen om jarenlang gedragen te worden. Of je nu onderweg bent naar de studio of de stad verkent.',
 
     // Colors
     'color.offwhite': 'Off White',
@@ -255,6 +257,7 @@ export const translations = {
     'product.classicShoulder.desc': 'En tidløs skulderrem med raffineret udseende. Fremstillet af høj kvalitet læder med luksus finish. Perfekt til både casual og formelle lejligheder.',
     'product.urbanBackpack.desc': 'Moderne rygsæk med bærbar computer-rum og gennemtænkt design. Ideel til daglig pendling eller en weekendtur. Holdbare materialer og ergonomisk design.',
     'product.travelDuffel.desc': 'Rummeligt weekend-tasker med forstærkede håndtag og justerbar skulderstrop. Ekstra stor kapacitet til alle dine rejsebehov. Vandafvisende og holdbar.',
+    'product.collection.desc': 'Lettvægts, rummeligt og designet til at holde i mange år. Uanset om du er på vej til studiet eller udforsker byen.',
 
     // Colors
     'color.offwhite': 'Off White',
