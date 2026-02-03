@@ -58,6 +58,12 @@ export const translations = {
     'product.verifiedPurchase': 'Verified purchase',
     'product.dragToRotate': 'Drag to rotate',
 
+    // Product Descriptions
+    'product.hoboBag.desc': 'Our iconic Canvas Hobo Bag is handcrafted from premium washed canvas. With its relaxed silhouette and spacious interior, this bag is perfect for daily use. The adjustable shoulder strap makes it comfortable to carry.',
+    'product.classicShoulder.desc': 'A timeless shoulder bag with a refined appearance. Crafted from high-quality leather with luxury finishing. Perfect for both casual and formal occasions.',
+    'product.urbanBackpack.desc': 'Modern backpack with laptop compartment and thoughtful design. Ideal for daily commuting or a weekend getaway. Durable materials and ergonomic design.',
+    'product.travelDuffel.desc': 'Spacious weekend bag with reinforced handles and adjustable shoulder strap. Extra large capacity for all your travel essentials. Water-resistant and durable.',
+
     // Colors
     'color.offwhite': 'Off White',
     'color.stone': 'Stone Grey',
@@ -148,6 +154,12 @@ export const translations = {
     'product.verifiedPurchase': 'Geverifieerde aankoop',
     'product.dragToRotate': 'Sleep om te draaien',
 
+    // Product Descriptions
+    'product.hoboBag.desc': 'Onze iconische Canvas Hobo Bag is handgemaakt van premium gewassen canvas. Met zijn relaxte silhouet en ruime binnenkant is deze tas perfect voor dagelijks gebruik. De verstelbare schouderband maakt hem comfortabel te dragen.',
+    'product.classicShoulder.desc': 'Een tijdloze schoudertas met een verfijnde uitstraling. Gemaakt van hoogwaardig leer met luxe afwerking. Perfect voor zowel casual als formele gelegenheden.',
+    'product.urbanBackpack.desc': 'Moderne rugzak met laptop compartiment en doordacht ontwerp. Ideaal voor dagelijks woon-werk verkeer of een weekendje weg. Duurzame materialen en ergonomisch ontwerp.',
+    'product.travelDuffel.desc': 'Ruime weekendtas met verstevigde handvatten en verstelbare schouderband. Extra grote capaciteit voor al je reisbenodigdheden. Waterafstotend en slijtvast.',
+
     // Colors
     'color.offwhite': 'Off White',
     'color.stone': 'Stone Grijs',
@@ -237,6 +249,12 @@ export const translations = {
     'product.noReviews': 'Dette produkt har ingen anmeldelser endnu. Køb dette produkt og vær den første til at skrive en anmeldelse!',
     'product.verifiedPurchase': 'Verificeret køb',
     'product.dragToRotate': 'Træk for at rotere',
+
+    // Product Descriptions
+    'product.hoboBag.desc': 'Vores ikoniske Canvas Hobo Bag er håndværket af premium vasket canvas. Med sin afslappet silhuet og rummeligt indre er denne taske perfekt til daglig brug. Den justerbare skulderstrop gør den behagelig at bære.',
+    'product.classicShoulder.desc': 'En tidløs skulderrem med raffineret udseende. Fremstillet af høj kvalitet læder med luksus finish. Perfekt til både casual og formelle lejligheder.',
+    'product.urbanBackpack.desc': 'Moderne rygsæk med bærbar computer-rum og gennemtænkt design. Ideel til daglig pendling eller en weekendtur. Holdbare materialer og ergonomisk design.',
+    'product.travelDuffel.desc': 'Rummeligt weekend-tasker med forstærkede håndtag og justerbar skulderstrop. Ekstra stor kapacitet til alle dine rejsebehov. Vandafvisende og holdbar.',
 
     // Colors
     'color.offwhite': 'Off White',

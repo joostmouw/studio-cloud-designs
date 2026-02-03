@@ -1,34 +1,20 @@
 import ProductCard from "./ProductCard";
 
-// Weekend Tote images in different colors
+// Weekend Tote images in different colors (only existing files)
 const weekendToteWhiteImages = [
   "/products/weekend-tote/1-white.jpg",
   "/products/weekend-tote/2-white.jpg",
   "/products/weekend-tote/3-white.jpg",
-  "/products/weekend-tote/4-white.jpg",
-  "/products/weekend-tote/5-white.jpg",
   "/products/weekend-tote/6-white.jpg",
   "/products/weekend-tote/7-white.jpg",
 ];
 
 const weekendToteBlackImages = [
   "/products/weekend-tote/1-black.jpg",
-  "/products/weekend-tote/2-black.jpg",
-  "/products/weekend-tote/3-black.jpg",
-  "/products/weekend-tote/4-black.jpg",
-  "/products/weekend-tote/5-black.jpg",
-  "/products/weekend-tote/6-black.jpg",
-  "/products/weekend-tote/7-black.jpg",
 ];
 
 const weekendToteGreenImages = [
   "/products/weekend-tote/1-green.jpg",
-  "/products/weekend-tote/2-green.jpg",
-  "/products/weekend-tote/3-green.jpg",
-  "/products/weekend-tote/4-green.jpg",
-  "/products/weekend-tote/5-green.jpg",
-  "/products/weekend-tote/6-green.jpg",
-  "/products/weekend-tote/7-green.jpg",
 ];
 
 // Color palette for Weekend Tote with proper names
@@ -40,29 +26,29 @@ const WEEKEND_TOTE_COLORS = [
 
 const products = [
   {
-    id: "weekend-tote-white",
-    name: "The Cloud Tote No. 1",
+    id: "hobo-bag-1",
+    name: "The Cloud Tote — Off White",
     price: "€34,95",
     image: weekendToteWhiteImages[0],
-    images: weekendToteWhiteImages.slice(1), // Preview images (2-7)
+    images: weekendToteWhiteImages.slice(1),
     colors: WEEKEND_TOTE_COLORS,
     isNew: true,
   },
   {
-    id: "weekend-tote-black",
-    name: "The Cloud Tote — Midnight",
+    id: "hobo-bag-1",
+    name: "The Cloud Tote — Midnight Black",
     price: "€34,95",
     image: weekendToteBlackImages[0],
-    images: weekendToteBlackImages.slice(1), // Preview images (2-7)
+    images: weekendToteBlackImages.slice(1),
     colors: WEEKEND_TOTE_COLORS,
     isNew: false,
   },
   {
-    id: "weekend-tote-green",
-    name: "The Cloud Tote — Green",
+    id: "hobo-bag-1",
+    name: "The Cloud Tote — Moss Green",
     price: "€34,95",
     image: weekendToteGreenImages[0],
-    images: weekendToteGreenImages.slice(1), // Preview images (2-7)
+    images: weekendToteGreenImages.slice(1),
     colors: WEEKEND_TOTE_COLORS,
     isNew: false,
   },
