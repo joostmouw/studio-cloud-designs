@@ -5,6 +5,7 @@ export interface Product {
   description: string;
   price: number;
   images: string[];
+  imagesByColor?: Record<string, string[]>; // Maps color value to array of images
   colors: ProductColor[];
   inStock: boolean;
   category: string;

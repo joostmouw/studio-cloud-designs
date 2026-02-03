@@ -42,6 +42,16 @@ const ProductPage = () => {
   const [viewMode, setViewMode] = useState<'images' | '3d'>('images');
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
+  // Get product images based on selected color
+  const productImages = product.imagesByColor && product.imagesByColor[selectedColor.value]
+    ? product.imagesByColor[selectedColor.value]
+    : product.images;
+
+  // Reset image index when color changes
+  useEffect(() => {
+    setSelectedImageIndex(0);
+  }, [selectedColor.value]);
+
   const inWishlist = isInWishlist(product.id);
 
   const handleWishlistToggle = () => {
@@ -109,7 +119,7 @@ const ProductPage = () => {
                   {/* Main Image */}
                   <div className="aspect-square bg-secondary/30 rounded-lg overflow-hidden">
                     <img
-                      src={product.images[selectedImageIndex]}
+                      src={productImages[selectedImageIndex]}
                       alt={`${product.name} - afbeelding ${selectedImageIndex + 1}`}
                       className="w-full h-full object-cover"
                       onError={(e) => {
@@ -120,9 +130,9 @@ const ProductPage = () => {
                   </div>
 
                   {/* Thumbnail Navigation */}
-                  {product.images.length > 1 && (
+                  {productImages.length > 1 && (
                     <div className="grid grid-cols-5 gap-2">
-                      {product.images.map((image, index) => (
+                      {productImages.map((image, index) => (
                         <button
                           key={index}
                           onClick={() => setSelectedImageIndex(index)}
