@@ -101,7 +101,14 @@ const AccountPage = () => {
       });
     } else {
       addAddress({
-        ...data,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        street: data.street,
+        houseNumber: data.houseNumber,
+        houseNumberAddition: data.houseNumberAddition,
+        postalCode: data.postalCode,
+        city: data.city,
+        phone: data.phone,
         country: 'Nederland',
       });
     }
